@@ -94,7 +94,7 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.get('/:id/comments', (req, res) => {
+router.get('/:id/comments', async (req, res) => {
 	database
 		.findPostComments(req.params.id)
 		.then(data => {
@@ -106,7 +106,9 @@ router.get('/:id/comments', (req, res) => {
 				});
 			}
 		})
+
 		.catch(err => {
+			console.log(error);
 			res
 				.status(500)
 				.json({ errorMessage: 'The post information could not be retrieved.' });
